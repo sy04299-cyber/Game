@@ -182,10 +182,10 @@ kbd{background:#fff2;border:1px solid #ffffff28;border-radius:3px;padding:1px 5p
   <div class="ic" id="aR" title="Ghost / Agni Stance (R)" style="opacity: 1;">⚡<u>R</u><s style="height: 0%;"></s></div>
 </div>
 <div id="top-tools">
-  <button class="tool-btn" id="dl-hud-btn" title="Download standalone HTML file">⬇ HTML</button>
   <button class="tool-btn" id="sfx-btn" title="Toggle combat audio">🔊 SFX</button>
   <button class="tool-btn" id="gfx-btn" title="Cycle Graphics Quality">✨ GFX: ULTRA</button>
   <button class="tool-btn" id="touch-btn" title="Toggle Touch Controls">📱 TOUCH: OFF</button>
+</div>
 </div>
 
 <!-- Mobile & Tablet Touch Controller Overlay -->
@@ -207,8 +207,7 @@ kbd{background:#fff2;border:1px solid #ffffff28;border-radius:3px;padding:1px 5p
 <p><kbd>WASD</kbd> / <kbd>Joystick</kbd> Move · <kbd>Mouse</kbd> / <kbd>Touch</kbd> Look · <kbd>Click</kbd>/<kbd>J</kbd> Combo · <kbd>Tab</kbd> or <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> Switch Stance (<b>Stone</b> / <b>Water</b> / <b>Wind</b>)<br><kbd>RMB</kbd>/<kbd>F</kbd> Deflect before impact to <b>PARRY</b> &amp; unleash <b>HEAVENLY RIPOSTE</b> · <kbd>Space</kbd> Dodge (Cancel any recovery!)<br><kbd>H</kbd>/<kbd>Shift+Click</kbd> Heavy Cleave · <kbd>Q</kbd> Flame Wave · <kbd>E</kbd> Resolve Mend · <kbd>R</kbd> Ghost Fury · <kbd>T</kbd> Lock-On</p>
 <div class="btn-row">
   <button id="go">UNSHEATHE BLADE</button>
-  <button id="dl-ov-btn" class="btn-sec">⬇ DOWNLOAD STANDALONE HTML</button>
-</div></div></div>
+  </div></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
@@ -260,25 +259,7 @@ function smoothWeldGeo(geo, dispAmp=0, dispFreq=1.8) {
   return out;
 }
 
-/* ---------- Standalone HTML Downloader & Web Audio Combat SFX ---------- */
-let INITIAL_HTML = '';
-window.addEventListener('DOMContentLoaded', () => {
-  INITIAL_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-});
-function downloadStandaloneHTML(e) {
-  if (e) e.stopPropagation();
-  const src = INITIAL_HTML || ('<!DOCTYPE html>\n' + document.documentElement.outerHTML);
-  const blob = new Blob([src], { type: 'text/html;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'Dandaka_Guardian_Vrakshasura_Enhanced.html';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 400);
-}
-$('dl-hud-btn').onclick = downloadStandaloneHTML;
-$('dl-ov-btn').onclick = downloadStandaloneHTML;
+
 
 let actx = null, sfxOn = true;
 $('sfx-btn').onclick = (e) => {
